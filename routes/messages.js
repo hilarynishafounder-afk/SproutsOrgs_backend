@@ -5,11 +5,14 @@ const auth = require('../middleware/auth');
 
 // POST submit message — public
 router.post('/', async (req, res) => {
+  console.log('[POST /api/messages] Received request:', req.body);
   try {
     const message = new Message(req.body);
     await message.save();
+    console.log('[POST /api/messages] Message saved successfully');
     res.status(201).json({ message: 'Message sent successfully' });
   } catch (err) {
+    console.error('[POST /api/messages] Error saving message:', err.message);
     res.status(400).json({ error: err.message });
   }
 });

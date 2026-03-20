@@ -5,12 +5,15 @@ const auth = require('../middleware/auth');
 
 // POST register for an event
 router.post('/', async (req, res) => {
+  console.log('[POST /api/register] Received registration request:', req.body);
   try {
     const { name, email, phone, college, course, eventId } = req.body;
     const registration = new Registration({ name, email, phone, college, course, eventId });
     await registration.save();
+    console.log('[POST /api/register] Registration saved successfully');
     res.status(201).json({ message: 'Registration successful', registration });
   } catch (err) {
+    console.error('[POST /api/register] Registration error:', err.message);
     res.status(400).json({ error: err.message });
   }
 });
