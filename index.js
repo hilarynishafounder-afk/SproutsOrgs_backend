@@ -72,6 +72,9 @@ app.use('/api/admin', require('./routes/admin'));
 app.use('/api/messages', require('./routes/messages'));
 app.use('/api/internships', require('./routes/internships'));
 
+// Root route
+app.get('/', (req, res) => res.send('🚀 Sprouts Backend API is running... Use /api/health for status.'));
+
 // Health check
 app.get('/api/health', (req, res) => res.json({ status: 'ok', environment: USE_CLOUD ? 'Cloud' : 'Local' }));
 
